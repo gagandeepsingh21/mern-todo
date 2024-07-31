@@ -1,0 +1,17 @@
+const TodoModel = require("../models/TodoModel")
+const asyncHandler = require("express-async-handler")
+
+module.exports.getToDo = asyncHandler(async(req,res) => {
+    const toDo = await TodoModel.find()
+    res.send(toDo)
+});
+
+module.exports.saveToDo = asyncHandler(async(req,res) => {
+    const{ text } = req.body
+        TodoModel.create({text}).then((data)=>{
+        console.log('successfully created');
+        console.log(data)
+        res.send(data)
+    })
+
+});
